@@ -17,3 +17,6 @@ class Active_Skill(Skill):
         
     def getDict(self):
         return skill_list.activeSkillDict
+    
+    def getIdPostfix(self):
+        return "_active"

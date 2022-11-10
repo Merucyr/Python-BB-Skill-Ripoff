@@ -4,10 +4,10 @@ import skill_list
 # Mimic-ing skills, essentially player modifiers in some way
 class Skill:
     def __init__(self, id=None):
-        self.id = id           # ID was useful for event checks, etc
+        self.id = id + self.getIdPostfix()          # ID was useful for event checks, etc
+        self._isActive = False
         self.setStatMods()     # Technically all skills have stat mods
         self.setDefaultName()  # All skills have a display name, whether it's a background's name or etc
-        self._isActive = False
 
     # .id get/set
     @property
@@ -66,3 +66,6 @@ class Skill:
     # because all backgrounds would come from the backgroundDict, all skills from skillDict, etc
     def getDict(self):
         return skill_list.skillDict
+
+    def getIdPostfix(self):
+        return "_skill"
