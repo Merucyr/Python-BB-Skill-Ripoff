@@ -11,3 +11,11 @@ skillDict = {
         }
     }
 }
+
+activeSkillDict = {
+    "hand_to_hand_active" : {
+        "dispName" : "Hand to Hand",
+        "baseDamage" : 5,
+        "damageType" : "blunt"
+    }
+}

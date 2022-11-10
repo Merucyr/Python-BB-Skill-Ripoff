@@ -7,7 +7,7 @@ class Skill:
         self.id = id           # ID was useful for event checks, etc
         self.setStatMods()     # Technically all skills have stat mods
         self.setDefaultName()  # All skills have a display name, whether it's a background's name or etc
-
+        self._isActive = False
 
     # .id get/set
     @property
@@ -21,8 +21,8 @@ class Skill:
 
     # .statMods get, the set shouldn't be called unless forcing an override ideally
     @property
-    def statMods(self): #Returns actual dict not a copy
-        return self._statMods
+    def statMods(self):
+        return self._statMods.copy()
 
     def setStatMods(self, override=None):
         if override != None:
@@ -47,7 +47,19 @@ class Skill:
 
     # sDN used for setting the actual display name relative to the dict, could override this by using the name setter
     def setDefaultName(self):
-        self.name = self.getDict()[self.id]["dispName"]
+        try:
+            self.name = self.getDict()[self.id]["dispName"]
+        except KeyError:
+            self.name = "DISPLAY NAME NOT FOUND"
+            print("Name not found in dictionary: ", self.id, "of object: ", self, "in dict: ", self.getDict())
+
+    # Currently no attatchment to anything so we just check if things are active
+    def isUsable(self):
+        return self._isActive
+    
+    # This will eventually be different to isUsable, where isUsable will check actual currently-usable
+    def isActive(self):
+        return self._isActive
 
     # getDict convenient, we use dicts to hold our keyID : skillInformation
     # using this we can generalize all of our dict calls instead of having to pass it in etc

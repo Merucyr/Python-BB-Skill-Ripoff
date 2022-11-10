@@ -27,3 +27,17 @@ class Skill_Container:
             sM["RangedDefense"]  += s.statMods["RangedDefense"]
             sM["Bravery"]        += s.statMods["Bravery"]
         return sM #Because we copied we don't need to return a copy
+
+    def getActiveSkills(self):
+        active = []
+        for s in self.skills:
+            if s.isActive():
+                active.append(s)
+        return active
+
+    def getUsableSkills(self):
+        usable = []
+        for s in self.skills:
+            if s.isUsable():
+                usable.append(s)
+        return usable
